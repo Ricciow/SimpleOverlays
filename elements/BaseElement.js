@@ -9,11 +9,15 @@ export class BaseElement {
      * @param {float} width 
      * @param {float} height 
      * @param {str} scalingMode Y for vertical, X for horizontal, BOTH for both, NONE for no scaling
-     * @param {GuiManager} manager 
+     * @param {any} data 
+     * @param {GuiManager} manager The GuiManager Object
      */
-    constructor(key = "", X = 0, Y = 0, width = 20, height = 20, scale = 1, scalingMode = 'X', manager) {
+    constructor(key = "", X = 0, Y = 0, width = 20, height = 20, scale = 1, scalingMode = 'X', data, manager) {
 
         this.key = key
+
+        //! Constant that must be changed when making custom elements
+        this.type = "Base"
 
         this.isDragging = false;
 
@@ -31,12 +35,12 @@ export class BaseElement {
 
         this.scalingMode = scalingMode
 
+        this.data = data
+
         this.manager = manager
 
         this.boundingBox = new UIBlock()
         .setColor(invisibleColor)
-        .setX(this.x.pixels())
-        .setY(this.y.pixels())
         .onMouseClick((comp, event) => {
             //Start Dragging
             this.isDragging = true;
@@ -48,7 +52,7 @@ export class BaseElement {
             this.isDragging = false;
         })
         .onMouseDrag((comp, mx, my) => {
-            //Dragging Features
+            //Dragging
             if (!this.isDragging) return;
             const absoluteX = mx + comp.getLeft();
             const absoluteY = my + comp.getTop();
@@ -62,23 +66,30 @@ export class BaseElement {
             this.x = this.boundingBox.getLeft() + dx;
             this.y = this.boundingBox.getTop() + dy;
 
-            this.updateState()
+            this.updateState(true)
         })
         .onMouseScroll((comp, event) => {
             //Change Scale
             this.scale = Math.max(Math.round((this.scale + (Math.max(this.scale * 0.1, 0.1)) * event.delta)*10)/10, 0.1);
-            this.updateState()
+            this.updateState(true)
         })
 
-        this.updateWidth()
+        this.updateState()
     }
 
-    updateState() {
+    /**
+    * Updates Both Position and Width/Height
+    * @param {boolean} updateData should the data in the manager be updated
+    **/
+    updateState(updateData = false) {
         this.updatePos()
         this.updateWidth()
-        this.manager.updateElementData(this.key)
+        if(updateData) this.manager.updateElementData(this.key)
     }
 
+    /**
+     * Updates the Width/Height
+     */
     updateWidth() {
         switch(this.scalingMode) {
             case "X":
@@ -98,31 +109,58 @@ export class BaseElement {
                 break;
             case "NONE":
             default:
+                this.boundingBox
                 .setWidth(new ChildBasedSizeConstraint)
                 .setHeight(new ChildBasedSizeConstraint)
                 break;
         }
     }
 
+    /**
+     * Updates the X and Y Coordinates
+     */
     updatePos() {
         this.boundingBox
         .setX(this.x.pixels())
         .setY(this.y.pixels())
     }
 
+    /**
+     * Method ran just before the window is drawn
+     */
+    onDraw() {
+       
+    }
+
+    /**
+     * Method ran when opening the move menu, meant for internal use
+     */
     open() {
         this.boundingBox.setColor(new Color(1, 1, 1, 0.5))
     }
 
+    /**
+     * Method ran when closing the move menu, meant for internal use
+     */
     close() {
         this.boundingBox.setColor(invisibleColor)
     }
 
-    hide() {
-        this.boundingBox.hide()
+    /**
+     * Method that returns the boundingBox of the element
+     */
+    getBoundingBox() {
+        return this.boundingBox
+    }
+    
+    /**
+     * Method that deletes this element, only removes the elementa object, use the GuiManager if you want to remove an item
+     */
+    deleteElement() {
+        this.boundingBox.getParent().removeChild(this.boundingBox)
     }
 
-    unhide() {
-        this.boundingBox.unhide(true)
+    setChildOf(element) {
+        this.boundingBox.setChildOf(element)
     }
 }

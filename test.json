@@ -1,0 +1,12 @@
+{
+    "Name": {
+        "type": "Base",
+        "x": 0,
+        "y": 0,
+        "width": 20,
+        "height": 10,
+        "scale": 4.1,
+        "scalingMode": "BOTH",
+        "data": "Test"
+    }
+}

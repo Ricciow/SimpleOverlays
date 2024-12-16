@@ -1,0 +1,22 @@
+{
+    "Name": {
+        "type": "Text",
+        "x": 0,
+        "y": 0,
+        "width": 20,
+        "height": 10,
+        "scale": 1,
+        "scalingMode": "NONE",
+        "data": "Test"
+    },
+    "Name2": {
+        "type": "Item",
+        "x": 20,
+        "y": 0,
+        "width": 20,
+        "height": 10,
+        "scale": 1,
+        "scalingMode": "BOTH",
+        "data": ""
+    }
+}
