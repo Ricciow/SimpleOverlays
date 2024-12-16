@@ -181,7 +181,7 @@ export class GuiManager {
     }
 
     /**
-     * Creates an element, adding it to the overlay and to the save data
+     * Creates an element, adding it to the overlay and to the save data, only creates it if it doesnt exist already.
      * @param {str} elementName 
      * @param {str} type 
      * @param {float} x 
@@ -193,8 +193,10 @@ export class GuiManager {
      * @param {...any} data 
      */
     createElement(elementName, type, x, y, width, height, scale, scalingMode, data) {
-        this.addElement(elementName, type, x, y, width, height, scale, scalingMode, data)
-        this.updateElementData(elementName)
+        if(!Object.keys(this.elements).includes(elementName)) {
+            this.addElement(elementName, type, x, y, width, height, scale, scalingMode, data)
+            this.updateElementData(elementName)
+        }
     }
     
 

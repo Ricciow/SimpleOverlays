@@ -1,4 +1,4 @@
-import { ChildBasedSizeConstraint, UIBlock} from "../../Elementa";
+import { ChildBasedSizeConstraint, UIBlock } from "../../Elementa";
 import { invisibleColor, Color } from "../constants";
 
 export class BaseElement {
