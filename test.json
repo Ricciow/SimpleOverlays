@@ -1,12 +1,12 @@
 {
     "Name": {
         "type": "CTText",
-        "x": 65,
-        "y": 40,
+        "x": 0,
+        "y": 0,
         "width": 20,
         "height": 10,
-        "scale": 1.4,
-        "scalingMode": "X",
+        "scale": 2.2,
+        "scalingMode": "Y",
         "data": "Test\nlol"
     }
 }
