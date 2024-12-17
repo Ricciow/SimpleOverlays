@@ -1,28 +1,7 @@
 import {
-    AdditiveConstraint,
-    animate,
-    Animations,
     CenterConstraint,
-    ChildBasedMaxSizeConstraint,
-    ChildBasedSizeConstraint,
-    ConstantColorConstraint,
-    FillConstraint,
-    ScissorEffect,
-    SiblingConstraint,
-    SubtractiveConstraint,
     UIBlock,
-    UIMultilineTextInput,
-    UIText,
-    WindowScreen,
-    MarkdownComponent,
-    Inspector,
-    UITextInput,
-    RelativeWindowConstraint,
-    RelativeConstraint,
-    UIRoundedRectangle,
-    ScrollComponent,
-    UIContainer,
-    UIWrappedText
+    WindowScreen
 } from "../Elementa";
 
 import { Color, invisibleColor } from "./constants"

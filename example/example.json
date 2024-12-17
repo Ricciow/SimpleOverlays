@@ -1,21 +1,21 @@
 {
     "Name": {
         "type": "CTText",
-        "x": 123,
-        "y": 117,
+        "x": 105,
+        "y": 81,
         "width": 20,
         "height": 10,
-        "scale": 2,
+        "scale": 3.9,
         "scalingMode": "Y",
-        "data": "Test\nlol"
+        "data": "&b&lTest\nlol"
     },
     "Item": {
         "type": "CTItem",
-        "x": 400,
-        "y": 127,
+        "x": 192,
+        "y": 187,
         "width": 10,
         "height": 10,
-        "scale": 6.9,
+        "scale": 5.9,
         "scalingMode": "Y",
         "data": {
             "id": "minecraft:diamond_block",
@@ -25,8 +25,8 @@
     },
     "testItem": {
         "type": "CTItem",
-        "x": 295,
-        "y": 108,
+        "x": 225,
+        "y": 110,
         "width": 10,
         "height": 10,
         "scale": 3.6,
@@ -39,12 +39,12 @@
     },
     "testImage": {
         "type": "Image",
-        "x": 198,
-        "y": 115,
+        "x": 344,
+        "y": 81,
         "width": 40,
         "height": 40,
-        "scale": 1.1,
+        "scale": 4.1,
         "scalingMode": "BOTH",
-        "data": "dog.png"
+        "data": "example/dog.png"
     }
 }

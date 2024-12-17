@@ -1,7 +1,6 @@
 {
   "name": "SimpleOverlays",
   "creator": "Riccio",
-  "entry": "example.js",
   "version": "1.0.0",
   "requires": ["Elementa"]
 }
