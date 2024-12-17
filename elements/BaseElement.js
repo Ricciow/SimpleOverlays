@@ -160,6 +160,14 @@ export class BaseElement {
         this.boundingBox.getParent().removeChild(this.boundingBox)
     }
 
+    hide() {
+        this.boundingBox.hide()
+    }
+
+    unhide() {
+        this.boundingBox.unhide(true)
+    }
+
     setChildOf(element) {
         this.boundingBox.setChildOf(element)
     }
