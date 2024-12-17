@@ -15,19 +15,3 @@ export function UICTText(textPlaceholder) {
     }
     }).setText(textPlaceholder)
 }
-
-class ModifiableItem extends Item {
-    constructor(itemstack) {
-        super(itemstack)
-    }
-
-    /**
-     * Change the Item
-     * @param {MCTItemStack} itemstack 
-     */
-    changeItem(itemstack) {
-        this.item = itemstack.item
-        this.itemstack = itemstack
-    }
-}
-

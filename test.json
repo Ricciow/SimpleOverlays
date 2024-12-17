@@ -1,12 +1,40 @@
 {
     "Name": {
         "type": "CTText",
-        "x": 0,
-        "y": 0,
+        "x": 97,
+        "y": 75,
         "width": 20,
         "height": 10,
-        "scale": 2.2,
+        "scale": 2,
         "scalingMode": "Y",
         "data": "Test\nlol"
+    },
+    "Item": {
+        "type": "CTItem",
+        "x": 120,
+        "y": 58,
+        "width": 10,
+        "height": 10,
+        "scale": 2.6,
+        "scalingMode": "BOTH",
+        "data": {
+            "id": "minecraft:diamond_block",
+            "Count": 1,
+            "Damage": 0
+        }
+    },
+    "testItem": {
+        "type": "CTItem",
+        "x": 120,
+        "y": 85,
+        "width": 10,
+        "height": 10,
+        "scale": 2.8,
+        "scalingMode": "BOTH",
+        "data": {
+            "id": "minecraft:emerald",
+            "Count": 1,
+            "Damage": 0
+        }
     }
 }

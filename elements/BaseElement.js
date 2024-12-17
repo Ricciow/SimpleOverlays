@@ -4,6 +4,7 @@ import { invisibleColor, Color } from "../constants";
 export class BaseElement {
     /**
      * Your basic Element
+     * @param {str} key
      * @param {float} X 
      * @param {float} Y 
      * @param {float} width 
