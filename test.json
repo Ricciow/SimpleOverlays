@@ -39,11 +39,11 @@
     },
     "testImage": {
         "type": "Image",
-        "x": 175,
-        "y": 128,
+        "x": 198,
+        "y": 115,
         "width": 40,
         "height": 40,
-        "scale": 1.5,
+        "scale": 1.1,
         "scalingMode": "BOTH",
         "data": "dog.png"
     }

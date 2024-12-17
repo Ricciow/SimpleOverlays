@@ -44,13 +44,20 @@ export class CTItemElement extends BaseElement {
         .setChildOf(this.boundingBox)
     }
 
+    setData(data) {
+        super.setData(data)
+        this.item = this.itemFromData()
+    }
+
     itemFromData() {
-        if(Object.keys(this.data).length > 0) {
+        try {
             return new Item(MCItemStack.func_77949_a(NBT.parse(this.data).rawNBT))
         }
-        let item = new Item("minecraft:dirt")
-        this.data = item.getNBT().toObject()
-        return item
+        catch (error) {
+            let item = new Item("minecraft:dirt")
+            this.data = item.getNBT().toObject()
+            return item
+        }
     }
 }
 

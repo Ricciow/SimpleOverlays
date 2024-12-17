@@ -78,6 +78,11 @@ export class BaseElement {
         this.updateState()
     }
 
+    setData(data) {
+        this.data = data
+        this.manager.updateElementInfo(this.key)
+    }
+
     /**
     * Updates Both Position and Width/Height
     * @param {boolean} updateData should the data in the manager be updated
@@ -85,7 +90,7 @@ export class BaseElement {
     updateState(updateData = false) {
         this.updatePos()
         this.updateWidth()
-        if(updateData) this.manager.updateElementData(this.key)
+        if(updateData) this.manager.updateElementInfo(this.key)
     }
 
     /**

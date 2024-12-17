@@ -1,5 +1,5 @@
 import { BaseElement } from "./baseElement";
-import { UIImage } from "../../Elementa";
+import { CenterConstraint, SubtractiveConstraint, UIImage } from "../../Elementa";
 
 export class ImageElement extends BaseElement {
 
@@ -24,28 +24,30 @@ export class ImageElement extends BaseElement {
         let file = new java.io.File(Config.modulesFolder + "\\" + this.manager.module + "\\" + data)
         console.log(file)
         this.imageElement = new UIImage.ofFile(file)
+        .setX(new CenterConstraint)
+        .setY(new CenterConstraint)
         .setChildOf(this.boundingBox)
 
         switch(this.scalingMode) {
             case "X":
                 this.imageElement
-                .setWidth((100).percent())
-                .setHeight(this.height.pixels())
+                .setWidth(new SubtractiveConstraint((100).percent(), (4).pixels()))
+                .setHeight(new SubtractiveConstraint(this.height.pixels(), (4).pixels()))
                 break;
             case "Y":
                 this.imageElement
-                .setWidth(this.width.pixels())
-                .setHeight((100).percent())
+                .setWidth(new SubtractiveConstraint(this.width.pixels(), (4).pixels()))
+                .setHeight(new SubtractiveConstraint((100).percent(), (4).pixels()))
                 break;
             case "BOTH":
                 this.imageElement
-                .setWidth((100).percent())
-                .setHeight((100).percent())
+                .setWidth(new SubtractiveConstraint((100).percent(), (4).pixels()))
+                .setHeight(new SubtractiveConstraint((100).percent(), (4).pixels()))
                 break;
             default:
                 this.imageElement
-                .setWidth(this.width.pixels())
-                .setHeight(this.height.pixels())
+                .setWidth(new SubtractiveConstraint(this.width.pixels(), (4).pixels()))
+                .setHeight(new SubtractiveConstraint(this.height.pixels(), (4).pixels()))
                 break;
         }
     }

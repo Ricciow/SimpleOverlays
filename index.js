@@ -201,7 +201,7 @@ export class GuiManager {
     createElement(elementName, type, x, y, width, height, scale, scalingMode, data) {
         if(!Object.keys(this.elements).includes(elementName)) {
             this.addElement(elementName, type, x, y, width, height, scale, scalingMode, data)
-            this.updateElementData(elementName)
+            this.updateElementInfo(elementName)
         }
     }
     
@@ -227,15 +227,15 @@ export class GuiManager {
             if(scale) element.scale = scale;
             if(scalingMode) element.scalingMode = scalingMode;
             if(data) element.data = data;
-            this.updateElementData()
+            this.updateElementInfo()
         }
     }
 
     /**
-     * Updates an element's data
+     * Updates an element's data internally
      * @param {str} elementName The Name defined for that element
      */
-    updateElementData(elementName) {
+    updateElementInfo(elementName) {
         let element = this.getElement(elementName)
         if(element) {
             this.elementsData[elementName] = {
@@ -250,6 +250,18 @@ export class GuiManager {
             }
         }
     }
+
+    /**
+     * Updates an element's data
+     * @param {str} elementName The Name defined for that element
+     */
+    updateElementData(elementName, data) {
+        let element = this.getElement(elementName)
+        if(element) {
+            element.setData(data)
+        }
+    }
+
 
     /**
      * Returns an element's object
