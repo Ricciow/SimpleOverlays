@@ -108,7 +108,6 @@ export class BaseElement {
                 .setWidth((this.width * this.scale).pixels())
                 .setHeight((this.height * this.scale).pixels())
                 break;
-            case "NONE":
             default:
                 this.boundingBox
                 .setWidth(new ChildBasedSizeConstraint)

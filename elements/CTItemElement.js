@@ -23,7 +23,7 @@ export class CTItemElement extends BaseElement {
         }
         
         //Due to the Nature of this Element, scalingMode will forced to Y
-        super(key, X, Y, width, height, scale, scalingMode, data, manager)
+        super(key, X, Y, width, height, scale, "Y", data, manager)
 
         //! Constant that must be changed when making custom elements
         this.type = "CTItem"
@@ -39,8 +39,8 @@ export class CTItemElement extends BaseElement {
                 Tessellator.popMatrix()
             }
         })
-        .setHeight(new AspectConstraint(1))
-        .setWidth((100).percent())
+        .setHeight((100).percent())
+        .setWidth(new AspectConstraint(1))
         .setChildOf(this.boundingBox)
     }
 

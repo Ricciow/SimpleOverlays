@@ -1,8 +1,8 @@
 {
     "Name": {
         "type": "CTText",
-        "x": 97,
-        "y": 75,
+        "x": 123,
+        "y": 117,
         "width": 20,
         "height": 10,
         "scale": 2,
@@ -11,12 +11,12 @@
     },
     "Item": {
         "type": "CTItem",
-        "x": 120,
-        "y": 58,
+        "x": 400,
+        "y": 127,
         "width": 10,
         "height": 10,
-        "scale": 2.6,
-        "scalingMode": "BOTH",
+        "scale": 6.9,
+        "scalingMode": "Y",
         "data": {
             "id": "minecraft:diamond_block",
             "Count": 1,
@@ -25,16 +25,26 @@
     },
     "testItem": {
         "type": "CTItem",
-        "x": 120,
-        "y": 85,
+        "x": 295,
+        "y": 108,
         "width": 10,
         "height": 10,
-        "scale": 2.8,
-        "scalingMode": "BOTH",
+        "scale": 3.6,
+        "scalingMode": "Y",
         "data": {
             "id": "minecraft:emerald",
             "Count": 1,
             "Damage": 0
         }
+    },
+    "testImage": {
+        "type": "Image",
+        "x": 175,
+        "y": 128,
+        "width": 40,
+        "height": 40,
+        "scale": 1.5,
+        "scalingMode": "BOTH",
+        "data": "dog.png"
     }
 }

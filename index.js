@@ -29,11 +29,13 @@ import { Color, invisibleColor } from "./constants"
 import { BaseElement } from "./elements/baseElement";
 import { CTItemElement } from "./elements/CTItemElement";
 import { CTTextElement } from "./elements/CTTextElement";
+import { ImageElement } from "./elements/ImageElement";
 
 export const ElementTypes = {
     Base: BaseElement,
     CTText: CTTextElement,
-    CTItem: CTItemElement
+    CTItem: CTItemElement,
+    Image: ImageElement
 }
 
 export class GuiManager {

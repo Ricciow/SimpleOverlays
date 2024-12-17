@@ -1,6 +1,5 @@
 //Reserved For Testing
 import { GuiManager } from "../SimpleOverlays";
-import { CTItemElement } from "./elements/CTItemElement";
 
 const manager = new GuiManager("SimpleOverlays", "test.json", "simpleoverlay", undefined, undefined, "so", "test")
 
