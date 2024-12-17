@@ -45,8 +45,14 @@ export class CTItemElement extends BaseElement {
     }
 
     setData(data) {
+        if(data instanceof Item) {
+            this.item = data
+            data = data.getNBT().toObject()
+        }
+        else {
+            this.item = this.itemFromData()
+        }
         super.setData(data)
-        this.item = this.itemFromData()
     }
 
     itemFromData() {
