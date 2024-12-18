@@ -27,4 +27,9 @@ export class CTTextElement extends BaseElement {
         .setHeight((100).percent())
         .setChildOf(this.boundingBox)
     }
+
+    setData(data) {
+        this.textElement.setText(data)
+        super.setData(data)
+    }
 }

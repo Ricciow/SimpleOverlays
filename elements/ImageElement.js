@@ -22,7 +22,6 @@ export class ImageElement extends BaseElement {
         this.type = "Image"
 
         let file = new java.io.File(Config.modulesFolder + "\\" + this.manager.module + "\\" + data)
-        console.log(file)
         this.imageElement = new UIImage.ofFile(file)
         .setX(new CenterConstraint)
         .setY(new CenterConstraint)
