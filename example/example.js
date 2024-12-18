@@ -29,7 +29,7 @@ const manager = new GuiManager("SimpleOverlays", "example/example.json", "simple
  * 
  * Elements created through code will only be created if the key does not exist.
  */
-manager.createElement("testItem", "CTItem", 0, 0, 10, 10, 1, "BOTH", new Item("minecraft:emerald"))
+manager.createElement("testItem", "CTItem", true, 0, 0, 10, 10, 1, "BOTH", new Item("minecraft:emerald"))
 
 /**JSON
  * The other way to create the elements is through the Save file json
@@ -80,8 +80,8 @@ class ExampleNewElement extends BaseElement {
      * @param {Object|Item} data The data in the form of an objectified NBT tag or a CT Item
      * @param {GuiManager} manager The GuiManager Object
      */
-    constructor(key = "", X = 0, Y = 0, width = 20, height = 20, scale = 1, scalingMode = 'BOTH', data, manager) {
-        super(key, X, Y, width, height, scale, scalingMode, data, manager)
+    constructor(key = "", enabled = true, X = 0, Y = 0, width = 20, height = 20, scale = 1, scalingMode = 'BOTH', data, manager) {
+        super(key, enabled, X, Y, width, height, scale, scalingMode, data, manager)
 
         /**
          *!Constant that must be changed when making custom elements

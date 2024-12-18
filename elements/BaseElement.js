@@ -13,10 +13,11 @@ export class BaseElement {
      * @param {any} data 
      * @param {GuiManager} manager The GuiManager Object
      */
-    constructor(key = "", X = 0, Y = 0, width = 20, height = 20, scale = 1, scalingMode = 'X', data, manager) {
+    constructor(key = "", enabled = true, X = 0, Y = 0, width = 20, height = 20, scale = 1, scalingMode = 'X', data, manager) {
 
         this.key = key
 
+        this.enabled = enabled
         //! Constant that must be changed when making custom elements
         this.type = "Base"
 
@@ -88,9 +89,23 @@ export class BaseElement {
     * @param {boolean} updateData should the data in the manager be updated
     **/
     updateState(updateData = false) {
+        this.updateEnabled()
         this.updatePos()
         this.updateWidth()
         if(updateData) this.manager.updateElementInfo(this.key)
+    }
+
+    updateEnabled() {
+        if(this.boundingBox.hasParent) {
+            if(this.enabled) {
+                this.unhide()
+                console.log("UNHIDING")
+            }
+            else {
+                this.hide()
+                console.log("HIDING")
+            }
+        }
     }
 
     /**

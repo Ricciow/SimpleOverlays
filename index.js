@@ -130,7 +130,7 @@ export class GuiManager {
     createElements(){
         Object.keys(this.elementsData).forEach((key) => {
             let data = this.elementsData[key]
-            this.addElement(key, data.type, data.x, data.y, data.width, data.height, data.scale, data.scalingMode, data.data)
+            this.addElement(key, data.type, data.enabled, data.x, data.y, data.width, data.height, data.scale, data.scalingMode, data.data)
         })
     }
 
@@ -146,10 +146,10 @@ export class GuiManager {
      * @param {"X"|"Y"|"BOTH"|"NONE"} scalingMode 
      * @param {...any} data 
      */
-    addElement(elementName, type, x, y, width, height, scale, scalingMode, data) {
+    addElement(elementName, type, enabled, x, y, width, height, scale, scalingMode, data) {
         let Element = this.elementTypes[type]
         if(Element) {
-            let newElement = new Element(elementName, x, y, width, height, scale, scalingMode, data, this)
+            let newElement = new Element(elementName, enabled, x, y, width, height, scale, scalingMode, data, this)
             this.elements[elementName] = newElement
             newElement.setChildOf(this.background)
         }
@@ -177,9 +177,9 @@ export class GuiManager {
      * @param {"X"|"Y"|"BOTH"|"NONE"} scalingMode
      * @param {...any} data 
      */
-    createElement(elementName, type, x, y, width, height, scale, scalingMode, data) {
+    createElement(elementName, type, enabled, x, y, width, height, scale, scalingMode, data) {
         if(!Object.keys(this.elements).includes(elementName)) {
-            this.addElement(elementName, type, x, y, width, height, scale, scalingMode, data)
+            this.addElement(elementName, type, enabled, x, y, width, height, scale, scalingMode, data)
             this.updateElementInfo(elementName)
         }
     }
@@ -196,9 +196,10 @@ export class GuiManager {
      * @param {float|null} scalingMode The Scaling Mode
      * @param {float|null} data The data of that element
      */
-    updateElement(elementName, x, y, width, height, scale, scalingMode, data) {
+    updateElement(elementName, enabled, x, y, width, height, scale, scalingMode, data) {
         let element = this.getElement(elementName)
         if(element) {
+            if(typeof enabled === 'boolean') element.enabled = enabled
             if(x) element.x = x
             if(y) element.y = y
             if(width) element.width = width;
@@ -206,7 +207,7 @@ export class GuiManager {
             if(scale) element.scale = scale;
             if(scalingMode) element.scalingMode = scalingMode;
             if(data) element.data = data;
-            this.updateElementInfo()
+            this.updateElementInfo(elementName)
         }
     }
 
@@ -219,6 +220,7 @@ export class GuiManager {
         if(element) {
             this.elementsData[elementName] = {
                 type: element.type,
+                enabled: element.enabled,
                 x: element.x,
                 y: element.y,
                 width: element.width,
@@ -227,6 +229,7 @@ export class GuiManager {
                 scalingMode: element.scalingMode,
                 data: element.data
             }
+            element.updateState()
         }
     }
 

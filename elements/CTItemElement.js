@@ -16,14 +16,14 @@ export class CTItemElement extends BaseElement {
      * @param {Object|Item} data The data in the form of an objectified NBT tag or a CT Item
      * @param {GuiManager} manager The GuiManager Object
      */
-    constructor(key = "", X = 0, Y = 0, width = 20, height = 20, scale = 1, scalingMode = 'BOTH', data, manager) {
+    constructor(key = "", enabled = true, X = 0, Y = 0, width = 20, height = 20, scale = 1, scalingMode = 'BOTH', data, manager) {
 
         if(data instanceof Item) {
             data = data.getNBT().toObject()
         }
         
         //Due to the Nature of this Element, scalingMode will forced to Y
-        super(key, X, Y, width, height, scale, "Y", data, manager)
+        super(key, enabled, X, Y, width, height, scale, "Y", data, manager)
 
         //! Constant that must be changed when making custom elements
         this.type = "CTItem"

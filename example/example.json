@@ -1,6 +1,7 @@
 {
     "Name": {
         "type": "CTText",
+        "enabled": true,
         "x": 105,
         "y": 81,
         "width": 20,
@@ -11,6 +12,7 @@
     },
     "Item": {
         "type": "CTItem",
+        "enabled": true,
         "x": 192,
         "y": 187,
         "width": 10,
@@ -25,6 +27,7 @@
     },
     "testItem": {
         "type": "CTItem",
+        "enabled": true,
         "x": 225,
         "y": 110,
         "width": 10,
@@ -39,6 +42,7 @@
     },
     "testImage": {
         "type": "Image",
+        "enabled": true,
         "x": 344,
         "y": 81,
         "width": 40,

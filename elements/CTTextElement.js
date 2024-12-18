@@ -14,10 +14,10 @@ export class CTTextElement extends BaseElement {
      * @param {any} data The data in the form of a string
      * @param {GuiManager} manager The GuiManager Object
      */
-    constructor(key = "", X = 0, Y = 0, width = 20, height = 20, scale = 1, scalingMode = 'Y', data, manager) {
+    constructor(key = "", enabled = true, X = 0, Y = 0, width = 20, height = 20, scale = 1, scalingMode = 'Y', data, manager) {
 
         //Due to the Nature of this Element, scalingMode will forced to Y
-        super(key, X, Y, width, height, scale, "Y", data, manager)
+        super(key, enabled, X, Y, width, height, scale, "Y", data, manager)
 
         //! Constant that must be changed when making custom elements
         this.type = "CTText"
