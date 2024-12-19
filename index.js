@@ -254,6 +254,6 @@ export class GuiManager {
     }
 
     getElementData(elementName) {
-        return this.getElement().data
+        return this.getElement(elementName).data
     }
 }
