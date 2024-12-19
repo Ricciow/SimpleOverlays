@@ -99,11 +99,9 @@ export class BaseElement {
         if(this.boundingBox.hasParent) {
             if(this.enabled) {
                 this.unhide()
-                console.log("UNHIDING")
             }
             else {
                 this.hide()
-                console.log("HIDING")
             }
         }
     }

@@ -200,11 +200,11 @@ export class GuiManager {
         let element = this.getElement(elementName)
         if(element) {
             if(typeof enabled === 'boolean') element.enabled = enabled
-            if(x) element.x = x
-            if(y) element.y = y
-            if(width) element.width = width;
-            if(height) element.height = height;
-            if(scale) element.scale = scale;
+            if(x || x === 0) element.x = x
+            if(y || y === 0) element.y = y
+            if(width || width === 0) element.width = width;
+            if(height || height === 0) element.height = height;
+            if(scale || scale === 0) element.scale = scale;
             if(scalingMode) element.scalingMode = scalingMode;
             if(data) element.data = data;
             this.updateElementInfo(elementName)
@@ -251,5 +251,9 @@ export class GuiManager {
      */
     getElement(elementName) {
         return this.elements[elementName]
+    }
+
+    getElementData(elementName) {
+        return this.getElement().data
     }
 }
