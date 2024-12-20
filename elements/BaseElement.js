@@ -41,21 +41,42 @@ export class BaseElement {
 
         this.manager = manager
 
-        this.boundingBox = new UIBlock()
+        const outerThis = this
+        this.boundingBox = new JavaAdapter(UIBlock, {
+            updatePosition(x, y) {
+                outerThis.x = x
+                outerThis.y = y
+                outerThis.updateState()
+            }
+        })
         .setColor(invisibleColor)
         .onMouseClick((comp, event) => {
             //Start Dragging
             this.isDragging = true;
             this.dragOffset.x = event.absoluteX;
             this.dragOffset.y = event.absoluteY;
+
+            if(!this.manager.selectedChildren.includes(this.boundingBox)) {
+                this.manager.selectedChildren.forEach((child) => {
+                    child.setColor(new Color(1, 1, 1, 0.5))
+                })
+                this.manager.selectedChildren = [this.boundingBox]
+                this.boundingBox.setColor(new Color(0.75, 0.75, 0.75, 0.5))
+            }
         })
         .onMouseRelease(() => {
             //Stop Dragging
+            if(!this.isDragging) return;
             this.isDragging = false;
+            if(this.manager.selectedChildren.length == 1 && this.manager.selectedChildren[0] == this.boundingBox) {
+                this.manager.selectedChildren = []
+                this.boundingBox.setColor(new Color(1, 1, 1, 0.5))
+            }
         })
         .onMouseDrag((comp, mx, my) => {
             //Dragging
             if (!this.isDragging) return;
+            
             const absoluteX = mx + comp.getLeft();
             const absoluteY = my + comp.getTop();
 
@@ -64,11 +85,11 @@ export class BaseElement {
         
             this.dragOffset.x = absoluteX;
             this.dragOffset.y = absoluteY;
+            
+            this.manager.selectedChildren.forEach((child) => {
+                child.updatePosition(child.getLeft() + dx, child.getTop() + dy)
+            })
 
-            this.x = this.boundingBox.getLeft() + dx;
-            this.y = this.boundingBox.getTop() + dy;
-
-            this.updateState(true)
         })
         .onMouseScroll((comp, event) => {
             //Change Scale

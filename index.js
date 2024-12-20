@@ -40,17 +40,143 @@ export class GuiManager {
 
         this.bgColor = bgColor
 
+        //Select Multiple Stuff Block
+        this.dragStart = {x: 0, y: 0}
+
+        this.isDragging = false
+
+        this.selectArea = new UIBlock()
+        .setColor(new Color(0.75, 0.75, 0.75, 0.5))
+        
+        //Moving Children Stuff
+        this.selectedChildren = []
+        this.clickedChildren = false
+
         this.background = new UIBlock()
         .setColor(invisibleColor)
         .setWidth((100).percent())
         .setHeight((100).percent())
         .setX(new CenterConstraint)
         .setY(new CenterConstraint)
+        .onMouseClick((comp, event) => {
+            this.clickedChildren = false
+            this.background.children.forEach((child) => {
+                if(this.clickedChildren) return 
+
+                //Top left corner
+                let x1 = child.getLeft()
+                let y1 = child.getTop()
+                //Bottom right corner
+                let x2 = child.getRight()
+                let y2 = child.getBottom()
+                
+                if(x1 < event.absoluteX && event.absoluteX < x2) {
+                    if(y1 < event.absoluteY && event.absoluteY < y2) {
+                        this.clickedChildren = true
+                    }
+                }
+            })
+
+            if(!this.clickedChildren) {
+                this.selectedChildren.forEach((child) => {
+                    child.setColor(new Color(1, 1, 1, 0.5))
+                })
+                this.selectedChildren = []
+            }
+            
+            if(this.selectedChildren.length == 0 && !this.clickedChildren) {
+                //Start Dragging
+                this.isDragging = true;
+                this.dragStart.x = event.absoluteX;
+                this.dragStart.y = event.absoluteY;
+                //Position the UIBlock for selection
+                this.selectArea.setX(this.dragStart.x.pixels())
+                this.selectArea.setY(this.dragStart.y.pixels())
+                this.selectArea.setWidth((0).pixels())
+                this.selectArea.setHeight((0).pixels())
+                this.selectArea.unhide(true)
+            }
+        })
+        .onMouseRelease(() => {
+            if(this.selectedChildren.length == 0 && !this.clickedChildren) {
+                //Stop Dragging
+                this.isDragging = false;
+                let selectArea = {
+                    x1 : this.selectArea.getLeft(), 
+                    y1 : this.selectArea.getTop(),
+    
+                    x2 : this.selectArea.getRight(),
+                    y2 : this.selectArea.getBottom()
+                }
+    
+                this.background.children.forEach((child) => {
+                    let childArea = {
+                        x1 : child.getLeft(), 
+                        y1 : child.getTop(),
+        
+                        x2 : child.getRight(),
+                        y2 : child.getBottom()
+                    }
+                    
+
+                    if (!(selectArea.x2 < childArea.x1 || selectArea.x1 > childArea.x2 || selectArea.y2 < childArea.y1 || selectArea.y1 > childArea.y2)) {
+                        if(child != this.selectArea) {
+                            this.selectedChildren.push(child)
+                            child.setColor(new Color(0.75, 0.75, 0.75, 0.5))
+                        }
+                    }
+                })
+                this.selectArea.hide()
+            }
+        })
+        .onMouseDrag((comp, mx, my) => {
+            if(this.selectedChildren.length == 0 && !this.clickedChildren) {
+                //Dragging
+                if (!this.isDragging) return;
+                const absoluteX = mx + comp.getLeft();
+                const absoluteY = my + comp.getTop();
+    
+                const dx = absoluteX - this.dragStart.x;
+                const dy = absoluteY - this.dragStart.y;
+            
+                if(dx > 0 && dy > 0) {
+                    this.selectArea.setX(this.dragStart.x.pixels())
+                    this.selectArea.setY(this.dragStart.y.pixels())
+                    this.selectArea.setWidth(dx.pixels())
+                    this.selectArea.setHeight(dy.pixels())
+                }
+                else if(dx > 0) {
+                    //Dx positive Dy negative
+                    this.selectArea.setX(this.dragStart.x.pixels())
+                    this.selectArea.setY((this.dragStart.y + dy).pixels())
+                    this.selectArea.setWidth(dx.pixels())
+                    this.selectArea.setHeight((-dy).pixels())
+                }
+                else if(dy > 0) {
+                    //Dy positive Dx negative
+                    this.selectArea.setX((this.dragStart.x + dx).pixels())
+                    this.selectArea.setY(this.dragStart.y.pixels())
+                    this.selectArea.setWidth((-dx).pixels())
+                    this.selectArea.setHeight(dy.pixels())
+                }
+                else {
+                    this.selectArea.setX((this.dragStart.x + dx).pixels())
+                    this.selectArea.setY((this.dragStart.y + dy).pixels())
+                    this.selectArea.setWidth((-dx).pixels())
+                    this.selectArea.setHeight((-dy).pixels())
+                }
+            }
+        })
         .setChildOf(this.window)
         
+        this.selectArea
+        .setChildOf(this.background)
+        .hide()
+
         this.command = register("command", () => {
             this.open()
         }).setName(moveCommand)
+
         if(aliases) {
             this.command.setAliases(aliases)
         }
@@ -184,6 +310,22 @@ export class GuiManager {
         }
     }
     
+    /**
+     * Creates an element, adding it to the overlay and to the save data, replaces old element if it exists already.
+     * @param {str} elementName 
+     * @param {str} type 
+     * @param {float} x 
+     * @param {float} y 
+     * @param {float} width 
+     * @param {float} height 
+     * @param {float} scale 
+     * @param {"X"|"Y"|"BOTH"|"NONE"} scalingMode
+     * @param {...any} data 
+     */
+    replaceElement(elementName, type, enabled, x, y, width, height, scale, scalingMode, data) {
+        this.addElement(elementName, type, enabled, x, y, width, height, scale, scalingMode, data)
+        this.updateElementInfo(elementName)
+    }
 
     /**
      * Updates an element
