@@ -397,7 +397,18 @@ export class GuiManager {
         return this.elements[elementName]
     }
 
+    /**
+     * Returns an element's data
+     * @param {str} elementName The Name defined for that element
+     */
     getElementData(elementName) {
         return this.getElement(elementName).data
+    }
+
+    /**
+     * Returns an array of all keys for the elements.
+     */
+    getElementKeys() {
+        return Object.keys(this.elements)
     }
 }
