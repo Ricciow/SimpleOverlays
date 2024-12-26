@@ -282,7 +282,7 @@ export class GuiManager {
     }
     
     /**
-     * Deletes an element from the Overlay
+     * Deletes an element from the Overlay and removes it from the data.
      * @param {str} elementName 
      */
     deleteElement(elementName) {
@@ -324,6 +324,7 @@ export class GuiManager {
      * @param {...any} data 
      */
     replaceElement(elementName, type, enabled, x, y, width, height, scale, scalingMode, data) {
+        this.elements[elementName]?.deleteElement()
         this.addElement(elementName, type, enabled, x, y, width, height, scale, scalingMode, data)
         this.updateElementInfo(elementName)
     }
