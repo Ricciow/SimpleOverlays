@@ -289,6 +289,7 @@ export class GuiManager {
         this.elements[elementName]?.deleteElement()
         delete this.elements[elementName]
         delete this.elementsData[elementName]
+        this.saveData()
     }
 
     /**
