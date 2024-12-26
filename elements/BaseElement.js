@@ -46,7 +46,7 @@ export class BaseElement {
             updatePosition(x, y) {
                 outerThis.x = x
                 outerThis.y = y
-                outerThis.updateState()
+                outerThis.updateState(true)
             }
         })
         .setColor(invisibleColor)
