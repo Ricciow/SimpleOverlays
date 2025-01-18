@@ -1,4 +1,4 @@
-import { BaseElement } from "./baseElement";
+import { BaseElement } from "./BaseElement";
 import { AspectConstraint, UIBlock } from "../../Elementa";
 
 const MCItemStack = Java.type("net.minecraft.item.ItemStack");

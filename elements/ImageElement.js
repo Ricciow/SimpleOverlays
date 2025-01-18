@@ -1,4 +1,4 @@
-import { BaseElement } from "./baseElement";
+import { BaseElement } from "./BaseElement";
 import { CenterConstraint, SubtractiveConstraint, UIImage } from "../../Elementa";
 
 export class ImageElement extends BaseElement {

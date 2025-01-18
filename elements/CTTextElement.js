@@ -1,4 +1,4 @@
-import { BaseElement } from "./baseElement";
+import { BaseElement } from "./BaseElement";
 import { UICTText } from "../utils";
 
 export class CTTextElement extends BaseElement {
